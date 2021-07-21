@@ -44,35 +44,65 @@ class User extends Authenticatable
     /**
      * $user = User::find(1);
      * $user->is_admin; // true or false
-     * $user->is_counselor; // true or false
-     * $user->is_student; // true or false
+     * $user->is_bi; // true or false
+     * $user->is_pt; // true or false
+     * $user->is_pr; // true or false
+     * $user->is_pd; // true or false
+     * $user->is_casher; // true or false
+     * $user->is_sd; // true or false
+     * $user->is_pac; // true or false
      */
     // UserTypes in user_type column: admin, bi, pt, pr, pd, casher, sd, pac
     public function getIsAdminAttribute()
     {
         return auth()->user()->user_type == 'admin';
     }
-    public function getIsCounselorAttribute()
+    public function getIsBiAttribute()
     {
-        return auth()->user()->user_type == 'counselor';
+        return auth()->user()->user_type == 'bi';
     }
-    public function getIsStudentAttribute()
+    public function getIsPtAttribute()
     {
-        return auth()->user()->user_type == 'student';
+        return auth()->user()->user_type == 'pt';
+    }
+    public function getIsPrAttribute()
+    {
+        return auth()->user()->user_type == 'pr';
+    }
+    public function getIsPdAttribute()
+    {
+        return auth()->user()->user_type == 'pd';
+    }
+    public function getIsCasherAttribute()
+    {
+        return auth()->user()->user_type == 'casher';
+    }
+    public function getIsSdAttribute()
+    {
+        return auth()->user()->user_type == 'sd';
+    }
+    public function getIsPacAttribute()
+    {
+        return auth()->user()->user_type == 'pac';
     }
 
-    public function sex_type_text($sex_type)
+    public function getSexAttribute($value)
     {
-        $result = '';
-        if ($sex_type == 'M') {
-            $result = 'Male';
-        }
-        if ($sex_type == 'F') {
-            $result = 'Female';
-        }
-
-        return $result;
+        return $value == 'M' ? 'Male' : 'Female';
     }
+
+    // public function sex_type_text($sex_type)
+    // {
+    //     $result = '';
+    //     if ($sex_type == 'M') {
+    //         $result = 'Male';
+    //     }
+    //     if ($sex_type == 'F') {
+    //         $result = 'Female';
+    //     }
+
+    //     return $result;
+    // }
     public function account_type_text($user_type)
     {
         $result = '';
