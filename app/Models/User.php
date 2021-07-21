@@ -10,17 +10,17 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+    // Table
+    protected $table = 'users';
+    // Primary Key
+    protected $primaryKey = 'id';
+    // created_at and updated_at
+    public $timestamps = true;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+
+    protected $guarded = [];
+
+
 
     /**
      * The attributes that should be hidden for arrays.
@@ -40,4 +40,52 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * $user = User::find(1);
+     * $user->is_admin; // true or false
+     * $user->is_counselor; // true or false
+     * $user->is_student; // true or false
+     */
+    // UserTypes in user_type column: admin, bi, pt, pr, pd, casher, sd, pac
+    public function getIsAdminAttribute()
+    {
+        return auth()->user()->user_type == 'admin';
+    }
+    public function getIsCounselorAttribute()
+    {
+        return auth()->user()->user_type == 'counselor';
+    }
+    public function getIsStudentAttribute()
+    {
+        return auth()->user()->user_type == 'student';
+    }
+
+    public function sex_type_text($sex_type)
+    {
+        $result = '';
+        if ($sex_type == 'M') {
+            $result = 'Male';
+        }
+        if ($sex_type == 'F') {
+            $result = 'Female';
+        }
+
+        return $result;
+    }
+    public function account_type_text($user_type)
+    {
+        $result = '';
+        if ($user_type == 'admin') {
+            $result = 'Adminstrator';
+        }
+        if ($user_type == 'counselor') {
+            $result = 'Counselor';
+        }
+        if ($user_type == 'student') {
+            $result = 'Student';
+        }
+
+        return $result;
+    }
 }
