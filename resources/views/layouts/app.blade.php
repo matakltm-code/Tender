@@ -111,7 +111,7 @@
                         <li class="nav-item <?=(Route::current()->uri() == '' ? 'active':'')?>">
                             <a class="nav-link" href="/">Approved Requests</a>
                         </li>
-                        {{-- Procurement Approving Commite --}}
+                        {{-- Procurement Approving Committee --}}
                         @elseif (auth()->user()->is_pac)
                         <li class="nav-item <?=(Route::current()->uri() == '' ? 'active':'')?>">
                             <a class="nav-link" href="/">Assess Bidders</a>
