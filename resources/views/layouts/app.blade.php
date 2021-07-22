@@ -76,15 +76,15 @@
                         <li class="nav-item <?=(Route::current()->uri() == 'notices' ? 'active':'')?>">
                             <a class="nav-link" href="/notices">Notices</a>
                         </li>
-                        <li class="nav-item <?=(Route::current()->uri() == 'notices' ? 'active':'')?>">
-                            <a class="nav-link" href="/pending-notices">Pending Notices</a>
+                        <li class="nav-item <?=(Route::current()->uri() == 'requests/approved' ? 'active':'')?>">
+                            <a class="nav-link" href="/requests/approved">View Requests</a>
                         </li>
                         <li class="nav-item <?=(Route::current()->uri() == 'notices' ? 'active':'')?>">
                             <a class="nav-link" href="/">Notify Winner</a>
                         </li>
                         {{-- Procurement Requester --}}
                         @elseif (auth()->user()->is_pr)
-                        <li class="nav-item <?=(Route::current()->uri() == 'notices' ? 'active':'')?>">
+                        <li class="nav-item <?=(Route::current()->uri() == 'requests' ? 'active':'')?>">
                             <a class="nav-link" href="/requests">Requests</a>
                         </li>
                         {{-- Property Department --}}
@@ -92,24 +92,24 @@
                         <li class="nav-item <?=(Route::current()->uri() == 'items' ? 'active':'')?>">
                             <a class="nav-link" href="/items">Items</a>
                         </li>
-                        <li class="nav-item <?=(Route::current()->uri() == '' ? 'active':'')?>">
-                            <a class="nav-link" href="/">Pending Requests</a>
+                        <li class="nav-item <?=(Route::current()->uri() == 'requests' ? 'active':'')?>">
+                            <a class="nav-link" href="/requests">Pending Requests</a>
                         </li>
                         {{-- Casher --}}
                         @elseif (auth()->user()->is_casher)
-                        <li class="nav-item <?=(Route::current()->uri() == '' ? 'active':'')?>">
-                            <a class="nav-link" href="/">Pending Requests</a>
+                        <li class="nav-item <?=(Route::current()->uri() == 'requests' ? 'active':'')?>">
+                            <a class="nav-link" href="/requests">Pending Requests</a>
                         </li>
                         <li class="nav-item <?=(Route::current()->uri() == 'winners' ? 'active':'')?>">
                             <a class="nav-link" href="/">Winners</a>
                         </li>
                         {{-- Scientific Director --}}
                         @elseif (auth()->user()->is_sd)
-                        <li class="nav-item <?=(Route::current()->uri() == '' ? 'active':'')?>">
-                            <a class="nav-link" href="/">Pending Requests</a>
+                        <li class="nav-item <?=(Route::current()->uri() == 'requests' ? 'active':'')?>">
+                            <a class="nav-link" href="/requests">Pending Requests</a>
                         </li>
-                        <li class="nav-item <?=(Route::current()->uri() == '' ? 'active':'')?>">
-                            <a class="nav-link" href="/">Approved Requests</a>
+                        <li class="nav-item <?=(Route::current()->uri() == 'requests/approved' ? 'active':'')?>">
+                            <a class="nav-link" href="/requests/approved">Approved Requests</a>
                         </li>
                         {{-- Procurement Approving Committee --}}
                         @elseif (auth()->user()->is_pac)
