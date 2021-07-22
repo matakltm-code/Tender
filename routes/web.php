@@ -42,3 +42,31 @@ Route::get('/account', [AccountController::class, 'index']);
 Route::post('/account', [AccountController::class, 'store']);
 Route::get('/account/login-history', [AccountController::class, 'login_history']);
 Route::post('/account/enable-disable', [AccountController::class, 'enable_disable_account']);
+
+
+// bi
+
+
+
+
+// pt
+
+
+
+// pr
+
+
+
+// pd
+
+
+
+// casher
+
+
+
+// sd
+
+
+
+// pac

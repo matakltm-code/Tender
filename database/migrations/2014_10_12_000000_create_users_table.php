@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('lname');
             $table->char('sex', 1);
             $table->string('phone');
-            $table->string('user_type')->default('student'); // student, counselor, admin
+            $table->string('user_type')->default('bi'); // admin, bi, pt, pr, pd, casher, sd, pac
 
             $table->string('username')->unique();
             $table->string('email')->unique();
