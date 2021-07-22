@@ -118,4 +118,9 @@ class User extends Authenticatable
 
         return $result;
     }
+
+    public function proposals()
+    {
+        return $this->hasMany(BidProposal::class, 'id', 'user_id');
+    }
 }

@@ -16,9 +16,12 @@
 
 
             <div class="col-md-8 col-sm-8">
-                <h3><a href="/notices/{{$notice->id}}">{{$notice->title}}</a></h3>
-                <small>Written on {{$notice->created_at}} by
-                    {{$notice->user->fname . ' ' . $notice->user->lname}}</small> <br>
+                <div class="d-flex flex-column">
+                    <h3><a href="/notices/{{$notice->id}}">{{$notice->title}}</a></h3>
+                    <small><strong>Total Proposal Submited: {{ $notice->proposals->count() }}</strong></small>
+                    <small>Written on {{$notice->created_at}} by
+                        {{$notice->user->fname . ' ' . $notice->user->lname}}</small>
+                </div>
             </div>
             <div class="col-md-4 col-sm-4">
                 <a href="/{{$notice->file_path}}">Download Bid Document</a>

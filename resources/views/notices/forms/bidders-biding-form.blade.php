@@ -1,7 +1,16 @@
 <div class="row mt-3 mb-4">
-    {{-- {{ dd($notice->proposal) }} // if there is no any row it will null --}}
+    {{-- if there is no any row it will null --}}
+    {{-- {{ dd($notice->proposals) }} --}}
     {{-- Check bidder is not summited before now --}}
-    @if (!$notice->proposal)
+    @php
+    $user_id = auth()->user()->id;
+    $notice_id = $notice->id;
+    $is_proposal_sumited = \App\Models\BidProposal::where('user_id', $user_id)->where('notice_id',
+    $notice_id)->get()->count();
+    @endphp
+    {{-- {{ dd($is_proposal_sumited) }} --}}
+    {{-- @if (!$notice->proposals) --}}
+    @if (!$is_proposal_sumited)
     {{-- @if (!$notice->proposal->exists) --}}
     {{-- Header --}}
     <div class="col-md-12">
@@ -77,7 +86,7 @@
     <div class="col-md-12">
         <div class="alert alert-info d-flex justify-content-between" role="alert">
             <strong>Proposal Submited</strong>
-            <a href="/proposals/{{$notice->proposal->id}}">Show Submited Proposal Detail</a>
+            {{-- <a href="/proposals/{{$notice->proposal->id}}">Show Submited Proposal Detail</a> --}}
         </div>
     </div>
 

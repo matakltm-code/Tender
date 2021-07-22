@@ -33,12 +33,15 @@
                 <h5>Step 3</h5> Bid winner is under review please frequently check the winners tab
             </strong>
         </div>
-        @elseif (!$proposal->assessed_pac_status)
+        @elseif ($proposal->is_pac_evaluated)
+        {{-- and also check the proposal is evaluated --}}
+        @if (!$proposal->assessed_pac_status)
         <div class="alert alert-danger" role="alert">
             <strong>
                 <h5>Sorry</h5> Your attachiment file is disqualified for bidding.
             </strong>
         </div>
+        @endif
         @else
         <div class="alert alert-warning" role="alert">
             <strong>

@@ -100,8 +100,8 @@
                         <li class="nav-item <?=(Route::current()->uri() == 'requests' ? 'active':'')?>">
                             <a class="nav-link" href="/requests">Pending Requests</a>
                         </li>
-                        <li class="nav-item <?=(Route::current()->uri() == 'winners' ? 'active':'')?>">
-                            <a class="nav-link" href="/">Winners</a>
+                        <li class="nav-item <?=(Route::current()->uri() == 'proposals/winner' ? 'active':'')?>">
+                            <a class="nav-link" href="/proposals/winner">Winners</a>
                         </li>
                         {{-- Scientific Director --}}
                         @elseif (auth()->user()->is_sd)

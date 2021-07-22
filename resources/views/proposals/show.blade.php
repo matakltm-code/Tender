@@ -33,6 +33,12 @@
         @else
         {{-- Notify the winner --}}
         @if (auth()->user()->is_pt)
+        @if ($proposal->winner_pt_status)
+        <button type="submit" class="btn btn-success btn-sm disabled">
+            Selected As<br>
+            Winner
+        </button>
+        @else
         <form method="post" action="/proposal/confirm_winner_pt_status/{{$proposal->id}}">
             @csrf
             <button type="submit" class="btn btn-success btn-sm">
@@ -40,6 +46,7 @@
                 Notify The Bidder
             </button>
         </form>
+        @endif
         @else
         <a href="/proposals" class="btn btn-link btn-sm">Go Back</a>
         @endif

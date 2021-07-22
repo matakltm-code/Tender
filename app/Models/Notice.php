@@ -32,8 +32,13 @@ class Notice extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function proposal()
+    // public function proposal()
+    // {
+    //     return $this->belongsTo(BidProposal::class, 'id', 'notice_id');
+    // }
+
+    public function proposals()
     {
-        return $this->belongsTo(BidProposal::class, 'id', 'notice_id');
+        return $this->hasMany(BidProposal::class, 'notice_id', 'id');
     }
 }

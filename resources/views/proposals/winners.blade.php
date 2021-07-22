@@ -16,6 +16,9 @@
         @if (auth()->user()->id == $proposal->user_id)
         <div class="bg-success p-2 col-md-12 text-white text-center">Your Proposal</div>
         @endif
+        @if ($proposal->winner_pt_status)
+        <div class="bg-success p-2 col-md-12 text-white text-center">Selected as a winner</div>
+        @endif
         <div class="card px-3 py-2 mb-2">
             <div class="row d-flex align-items-center">
                 <div class="col-md-8 col-sm-8">

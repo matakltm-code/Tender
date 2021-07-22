@@ -30,7 +30,7 @@ class BidProposalController extends Controller
     {
         $user_type = auth()->user()->user_type;
 
-        if (!in_array($user_type, ['bi', 'pt'])) {
+        if (!in_array($user_type, ['bi', 'pt', 'casher'])) {
             return redirect('/')->with('error', 'Your are not allowed to see this page');
         }
         $proposals = BidProposal::where('winner_pt_status', true)->orderBy('created_at', 'desc')->paginate(10);
@@ -39,17 +39,17 @@ class BidProposalController extends Controller
     }
 
     // My Bidding Tab For bi user types
-    // public function choose_winner_index()
-    // {
-    //     $user_type = auth()->user()->user_type;
+    public function choose_winner_index()
+    {
+        $user_type = auth()->user()->user_type;
 
-    //     if (!in_array($user_type, ['pt'])) {
-    //         return redirect('/')->with('error', 'Your are not allowed to see this page');
-    //     }
-    //     $proposals = BidProposal::where('winner_pt_status', true)->orderBy('created_at', 'desc')->paginate(10);
+        if (!in_array($user_type, ['pt'])) {
+            return redirect('/')->with('error', 'Your are not allowed to see this page');
+        }
+        $proposals = BidProposal::where('assessed_pac_status', true)->orderBy('created_at', 'desc')->paginate(10);
 
-    //     return view('proposals.winners')->with('proposals', $proposals);
-    // }
+        return view('proposals.winners')->with('proposals', $proposals);
+    }
 
     // For pac user types
     // Not approved bid proposal
@@ -127,8 +127,16 @@ class BidProposalController extends Controller
     public function show(BidProposal $bidProposal)
     {
         $user_type = auth()->user()->user_type;
-        if (!in_array($user_type, ['bi', 'pac', 'pt'])) {
+        if (!in_array($user_type, ['bi', 'pac', 'pt', 'casher'])) {
             return redirect('/')->with('error', 'Your are not allowed to see this page');
+        }
+
+        // check if the bidder is only see his/her proposal
+        if ($user_type == 'bi') {
+            $user_id = auth()->user()->id;
+            if ($bidProposal->user_id != $user_id) {
+                return redirect('/')->with('error', 'Your are not allowed to see this page');
+            }
         }
 
         // dd($bidProposal);

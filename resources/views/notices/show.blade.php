@@ -22,14 +22,15 @@
     </div>
     <div class="d-flex justify-content-between">
         @if(Auth::user()->id == $notice->user_id)
-        <form method="post" action="/notices/{{$notice->id}}">
+        @if ($notice->proposals->count() < 1) <form method="post" action="/notices/{{$notice->id}}">
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-danger">
                 {{ __('Delete') }}
             </button>
-        </form>
-        @endif
+            </form>
+            @endif
+            @endif
     </div>
 
 

@@ -27,7 +27,7 @@ class NoticeController extends Controller
         if (!in_array($user_type, ['pt'])) {
             return redirect('/')->with('error', 'Your are not allowed to see this page');
         }
-        return view('order-request.create');
+        return view('notices.create');
     }
 
     public function store(Request $request)

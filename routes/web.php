@@ -52,7 +52,7 @@ Route::get('/proposals', [BidProposalController::class, 'index']);
 Route::get('/proposals/assesse-bidders', [BidProposalController::class, 'assesse_index']);
 Route::get('/proposals/assessed-bidders', [BidProposalController::class, 'assessed_index']);
 Route::get('/proposals/winner', [BidProposalController::class, 'winner_index']);
-Route::get('/proposals/choose_winner', [BidProposalController::class, 'winner_index']); // pt user this must be here not down
+Route::get('/proposals/choose_winner', [BidProposalController::class, 'choose_winner_index']); // pt user this must be here not down
 Route::get('/proposals/{bidProposal}', [BidProposalController::class, 'show']);
 Route::post('/submit-notices', [NoticeController::class, 'submit_notices_store']);
 
