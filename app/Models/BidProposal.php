@@ -8,26 +8,33 @@ use Illuminate\Database\Eloquent\Model;
 class BidProposal extends Model
 {
     use HasFactory;
+    // Table
+    protected $table = 'bid_proposals';
+    // Primary Key
+    protected $primaryKey = 'id';
+    // created_at and updated_at
+    public $timestamps = true;
 
     protected $guarded = [];
 
-    /**
-     * Get the user that owns the BidProposal
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
+
+
+
+
+    public function getCreatedAtAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value)->diffForHumans();
+    }
+
+
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * Get the notice that owns the BidProposal
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function notice()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Notice::class, 'notice_id', 'id');
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\ChangepasswordController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\OrderRequestController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\BidProposalController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -46,8 +47,14 @@ Route::get('/account/login-history', [AccountController::class, 'login_history']
 Route::post('/account/enable-disable', [AccountController::class, 'enable_disable_account']);
 
 
-// bi
-
+// bi, pac
+Route::get('/proposals', [BidProposalController::class, 'index']);
+Route::get('/proposals/assesse-bidders', [BidProposalController::class, 'assesse_index']);
+Route::get('/proposals/assessed-bidders', [BidProposalController::class, 'assessed_index']);
+Route::get('/proposals/winner', [BidProposalController::class, 'winner_index']);
+Route::get('/proposals/choose_winner', [BidProposalController::class, 'winner_index']); // pt user this must be here not down
+Route::get('/proposals/{bidProposal}', [BidProposalController::class, 'show']);
+Route::post('/submit-notices', [NoticeController::class, 'submit_notices_store']);
 
 
 
@@ -56,9 +63,10 @@ Route::get('/notices', [NoticeController::class, 'index']);
 Route::get('/notices/create', [NoticeController::class, 'create']);
 Route::post('/notices', [NoticeController::class, 'store']);
 Route::get('/notices/{notice}', [NoticeController::class, 'show']);
-Route::get('/notices/{notice}/edit', [NoticeController::class, 'edit']);
-Route::patch('/notices/{notice}', [NoticeController::class, 'update']);
 Route::delete('/notices/{notice}', [NoticeController::class, 'destroy']);
+
+Route::post('/proposal/confirm_winner_pt_status/{proposal}', [BidProposalController::class, 'confirm_winner_pt_status']);
+
 
 
 
@@ -88,3 +96,5 @@ Route::post('/requests/sd/{request}', [OrderRequestController::class, 'sd_approv
 
 
 // pac
+Route::post('/proposal/approve_assessed_pac_status/{proposal}', [BidProposalController::class, 'approve_assessed_pac_status']);
+Route::post('/proposal/dis_approve_assessed_pac_status/{proposal}', [BidProposalController::class, 'dis_approve_assessed_pac_status']);

@@ -20,8 +20,10 @@ class CreateBidProposalsTable extends Migration
             $table->decimal('initial_payment');
             $table->text('bid_advantage');
             $table->text('file_path');
-            $table->boolean('is_win')->default(false); // True if this proposal is win
-            $table->boolean('winner_pt_status')->default(false); // Display for the bidder if pt make it true
+            // $table->boolean('is_win')->default(false); // True if this proposal is win
+            $table->boolean('winner_pt_status')->default(false); // Display for the bidder if pt make this it true
+            $table->boolean('assessed_pac_status')->default(false); // pac can change => if this is true then pt user can see and pt user will also notify winner(= the the winner will be winner_pt_status column as true)
+            $table->boolean('is_pac_evaluated')->default(false); // this will use for pac to display as evaluated proposal list or not
             $table->timestamps();
         });
     }

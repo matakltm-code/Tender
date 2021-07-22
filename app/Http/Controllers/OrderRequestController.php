@@ -21,7 +21,7 @@ class OrderRequestController extends Controller
     {
         $user_type = auth()->user()->user_type;
 
-        if (!in_array(auth()->user()->user_type, ['pr', 'pd', 'casher', 'sd'])) {
+        if (!in_array($user_type, ['pr', 'pd', 'casher', 'sd'])) {
             return redirect('/')->with('error', 'Your are not allowed to see this page');
         }
         $orderRequests = OrderRequest::orderBy('created_at', 'desc')->paginate(10);

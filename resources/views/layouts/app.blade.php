@@ -57,11 +57,11 @@
                         <li class="nav-item <?=(Route::current()->uri() == 'notices' ? 'active':'')?>">
                             <a class="nav-link" href="/notices">Notices</a>
                         </li>
-                        <li class="nav-item <?=(Route::current()->uri() == 'winners' ? 'active':'')?>">
-                            <a class="nav-link" href="/">Winners</a>
+                        <li class="nav-item <?=(Route::current()->uri() == 'proposals/winner' ? 'active':'')?>">
+                            <a class="nav-link" href="/proposals/winner">Winners</a>
                         </li>
-                        <li class="nav-item <?=(Route::current()->uri() == 'account/login-history' ? 'active':'')?>">
-                            <a class="nav-link" href="/">My Bidding</a>
+                        <li class="nav-item <?=(Route::current()->uri() == 'proposals' ? 'active':'')?>">
+                            <a class="nav-link" href="/proposals">My Bidding</a>
                         </li>
                         {{-- Admin --}}
                         @elseif (auth()->user()->is_admin)
@@ -79,8 +79,8 @@
                         <li class="nav-item <?=(Route::current()->uri() == 'requests/approved' ? 'active':'')?>">
                             <a class="nav-link" href="/requests/approved">View Requests</a>
                         </li>
-                        <li class="nav-item <?=(Route::current()->uri() == 'notices' ? 'active':'')?>">
-                            <a class="nav-link" href="/">Notify Winner</a>
+                        <li class="nav-item <?=(Route::current()->uri() == 'proposals/choose_winner' ? 'active':'')?>">
+                            <a class="nav-link" href="/proposals/choose_winner">Notify Winner</a>
                         </li>
                         {{-- Procurement Requester --}}
                         @elseif (auth()->user()->is_pr)
@@ -113,11 +113,13 @@
                         </li>
                         {{-- Procurement Approving Committee --}}
                         @elseif (auth()->user()->is_pac)
-                        <li class="nav-item <?=(Route::current()->uri() == '' ? 'active':'')?>">
-                            <a class="nav-link" href="/">Assess Bidders</a>
+                        <li
+                            class="nav-item <?=(Route::current()->uri() == 'proposals/assesse-bidders' ? 'active':'')?>">
+                            <a class="nav-link" href="/proposals/assesse-bidders">Assess Bidders</a>
                         </li>
-                        <li class="nav-item <?=(Route::current()->uri() == '' ? 'active':'')?>">
-                            <a class="nav-link" href="/">Evaluated Bidders</a>
+                        <li
+                            class="nav-item <?=(Route::current()->uri() == 'proposals/assessed-bidders' ? 'active':'')?>">
+                            <a class="nav-link" href="/proposals/assessed-bidders">Evaluated Bidders</a>
                         </li>
                         @endif
                         <li class="nav-item dropdown">

@@ -1,23 +1,28 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <a href="/posts" class="btn btn-link btn-sm">Go Back</a>
-    <h1>{{$post->title}}</h1>
-    @if ($post->image_path != null)
-    <img style="width:100%" src="/{{$post->image_path}}">
-    @endif
-    <div>
-        {!!$post->body!!}
+<div class="container mb-4">
+    <div class="d-flex justify-content-between">
+        <h1>{{$notice->title}}</h1>
+        <a href="/notices" class="btn btn-link btn-sm">Go Back</a>
     </div>
     <hr>
-    <small>Written on {{$post->created_at}} ({{$post->created_at->diffForHumans()}}) by {{$post->user->name}}</small>
-    <hr>
     <div class="d-flex justify-content-between">
-        @if(Auth::user()->id == $post->user_id)
-        <a href="/posts/{{$post->id}}/edit" class="btn btn-info">Edit</a>
-
-        <form method="POST" action="/posts/{{$post->id}}">
+        <div>
+            <small>Written on {{$notice->created_at}} by
+                {{$notice->user->fname . ' ' . $notice->user->lname}}</small>
+        </div>
+        <div>
+            <a class="btn btn-success btn-sm" href="/{{$notice->file_path}}">Download Bid Document</a>
+        </div>
+    </div>
+    <hr>
+    <div>
+        {!!$notice->notice_detail!!}
+    </div>
+    <div class="d-flex justify-content-between">
+        @if(Auth::user()->id == $notice->user_id)
+        <form method="post" action="/notices/{{$notice->id}}">
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-danger">
@@ -26,5 +31,11 @@
         </form>
         @endif
     </div>
+
+
+    @if (auth()->user()->is_bi)
+    {{-- Bidders Bidding Proposal Form --}}
+    @include('notices.forms.bidders-biding-form')
+    @endif
 </div>
 @endsection

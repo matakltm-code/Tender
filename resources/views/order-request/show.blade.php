@@ -7,7 +7,9 @@
             <h1>{{$request->user->fname . ' ' . $request->user->lname}}</h1>
         </div>
         <div>
+            @if (!auth()->user()->is_pt)
             <a href="/requests" class="btn btn-link btn-sm">Go Back</a>
+            @endif
         </div>
     </div>
 
