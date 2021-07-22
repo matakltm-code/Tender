@@ -10,4 +10,16 @@ class Item extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+
+    public function getCreatedAtAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value)->diffForHumans();
+    }
+
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value)->diffForHumans();
+    }
 }

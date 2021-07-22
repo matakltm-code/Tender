@@ -7,79 +7,77 @@ use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        //
+        if (!in_array(auth()->user()->user_type, ['pd'])) {
+            return redirect('/')->with('error', 'Your are not allowed to see this page');
+        }
+        $items = Item::where('quantity', '>', 0)->orderBy('created_at', 'desc')->paginate(10);
+        return view('items.index')->with('items', $items);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        if (!in_array(auth()->user()->user_type, ['pd'])) {
+            return redirect('/')->with('error', 'Your are not allowed to see this page');
+        }
+        return view('items.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        if (!in_array(auth()->user()->user_type, ['pd'])) {
+            return redirect('/')->with('error', 'Your are not allowed to see this page');
+        }
+        $data = $this->validate($request, [
+            'name' => 'required',
+            'quantity' => 'required|integer',
+        ]);
+
+        Item::create($data);
+
+        return redirect('/items')->with('success', 'Post Created');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Item  $item
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Item $item)
+    public function update_quantity(Request $request)
     {
-        //
+        if (!in_array(auth()->user()->user_type, ['pd'])) {
+            return redirect('/')->with('error', 'Your are not allowed to see this page');
+        }
+        $data = $this->validate($request, [
+            'item_id' => 'required|integer',
+            'quantity' => 'required|integer',
+        ]);
+
+        // Item::create($data);
+        $item = Item::find($data['item_id']);
+
+        $item->quantity = $data['quantity'];
+
+        $item->save();
+
+        return back()->with('success', 'Quantity Updated');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Item  $item
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Item $item)
+    public function delete_item(Request $request)
     {
-        //
-    }
+        if (!in_array(auth()->user()->user_type, ['pd'])) {
+            return redirect('/')->with('error', 'Your are not allowed to see this page');
+        }
+        $data = $this->validate($request, [
+            'item_id' => 'required|integer',
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Item  $item
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Item $item)
-    {
-        //
-    }
+        // Item::create($data);
+        $item = Item::find($data['item_id']);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Item  $item
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Item $item)
-    {
-        //
+        $item->delete();
+
+        return back()->with('success', 'Item Deleted');
     }
 }

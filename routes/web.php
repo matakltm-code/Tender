@@ -6,6 +6,7 @@ use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\OrderRequestController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BidProposalController;
+use App\Http\Controllers\ItemController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -84,6 +85,14 @@ Route::post('/requests/sd/{request}', [OrderRequestController::class, 'sd_approv
 
 
 // pd
+Route::get('/items', [ItemController::class, 'index']);
+Route::get('/items/create', [ItemController::class, 'create']);
+Route::post('/items', [ItemController::class, 'store']);
+Route::post('/items/update-quantity', [ItemController::class, 'update_quantity']);
+Route::post('/items/delete-item', [ItemController::class, 'delete_item']);
+// Route::get('/items/{item}/edit', [ItemController::class, 'edit']);
+// Route::patch('/items/{item}', [ItemController::class, 'update']);
+
 
 
 
