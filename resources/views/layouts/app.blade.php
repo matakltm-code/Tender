@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -25,9 +25,12 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-dark shadow-sm" style="background-color: green">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
+                <div class="d-flex align-items-center">
+                    <a href="/" class=""><img src="/images/logo.png" style="height: 50px;" class=""></a>
+                    <a class="navbar-brand ml-2" href="{{ url('/') }}">
+                        {{ config('app.name', 'Laravel') }}
+                    </a>
+                </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="{{ __('Toggle navigation') }}">
@@ -150,7 +153,12 @@
             </div>
         </nav>
 
+
+        @if(url()->current() === 'http://tender.test')
+        {{-- <main class="pb-4"> --}}
+        @else
         <main class="py-4">
+            @endif
             @include('inc.messages')
             @yield('content')
         </main>
